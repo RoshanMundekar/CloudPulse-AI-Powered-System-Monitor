@@ -1,0 +1,88 @@
+version: "3.9"
+
+services:
+
+  # ── PostgreSQL ──────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: cloudpulse-postgres
+    environment:
+      POSTGRES_DB: cloudpulse
+      POSTGRES_USER: cloudpulse
+      POSTGRES_PASSWORD: cloudpulse123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cloudpulse"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis ───────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: cloudpulse-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── FastAPI Backend ─────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cloudpulse-backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://cloudpulse:cloudpulse123@postgres:5432/cloudpulse
+      DATABASE_SYNC_URL: postgresql://cloudpulse:cloudpulse123@postgres:5432/cloudpulse
+      REDIS_URL: redis://redis:6379/0
+      DEBUG: "true"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    restart: unless-stopped
+
+  # ── Monitoring Agent ────────────────────────────────────────────────────────
+  agent:
+    build:
+      context: .
+      dockerfile: agent/Dockerfile
+    container_name: cloudpulse-agent
+    environment:
+      BACKEND_URL: http://backend:8000
+      COLLECT_INTERVAL: "5"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    # Needs host networking to read host metrics
+    network_mode: host
+
+  # ── React Frontend ──────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: cloudpulse-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  redis_data:

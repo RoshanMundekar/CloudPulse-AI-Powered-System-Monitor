@@ -1,0 +1,27 @@
+# ── Web framework ─────────────────────────────────────────────────────────────
+fastapi==0.109.2
+uvicorn[standard]==0.27.1
+
+# ── Database ──────────────────────────────────────────────────────────────────
+sqlalchemy==2.0.27
+asyncpg==0.29.0          # async PostgreSQL driver (used by SQLAlchemy)
+psycopg2-binary==2.9.9   # sync driver used by Alembic CLI
+alembic==1.13.1
+
+# ── Data validation ───────────────────────────────────────────────────────────
+pydantic==2.6.1
+pydantic-settings==2.1.0
+
+# ── Cache ─────────────────────────────────────────────────────────────────────
+redis==5.0.1             # includes redis.asyncio for async support
+
+# ── AI / ML ───────────────────────────────────────────────────────────────────
+scikit-learn==1.4.1.post1
+numpy==1.26.4
+
+# ── HTTP client (monitoring agent sender) ────────────────────────────────────
+httpx==0.26.0
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+python-dotenv==1.0.1
+psutil==5.9.8            # used by /api/system/info host stats
