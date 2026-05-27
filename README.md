@@ -1,5 +1,5 @@
 # CloudPulse — AI-Powered System Monitor
-### MCA Final Year Project | Real-Time System Monitoring with AI Anomaly Detection
+###  Real-Time System Monitoring with AI Anomaly Detection
 
 ---
 
