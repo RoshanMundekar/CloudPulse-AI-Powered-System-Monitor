@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { BellRing, RefreshCw } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { useMetrics } from '../../context/MetricsContext'
 import { formatDistanceToNow } from 'date-fns'
 
 export default function Header({ title, onRefresh }) {
   const { wsStatus, alertCount, lastUpdated, refreshCounts } = useMetrics()
   const [now, setNow] = useState(new Date())
+  const navigate = useNavigate()
 
   // Tick clock every second for the "X seconds ago" display
   useEffect(() => {
@@ -20,6 +22,10 @@ export default function Header({ title, onRefresh }) {
   const handleRefresh = async () => {
     await refreshCounts()
     onRefresh?.()
+  }
+
+  const handleBellClick = () => {
+    navigate('/alerts')
   }
 
   return (
@@ -51,9 +57,15 @@ export default function Header({ title, onRefresh }) {
           <RefreshCw className="w-3.5 h-3.5" />
         </button>
 
-        {/* Alert bell */}
-        <button className="relative btn-ghost p-2 rounded-lg" title="Alerts">
-          <BellRing className="w-3.5 h-3.5" />
+        {/* Alert bell — click navigates to /alerts page */}
+        <button
+          onClick={handleBellClick}
+          className="relative btn-ghost p-2 rounded-lg"
+          title={alertCount > 0
+            ? `${alertCount} unread alert${alertCount !== 1 ? 's' : ''} — click to view`
+            : 'Alerts'}
+        >
+          <BellRing className={`w-3.5 h-3.5 transition-colors ${alertCount > 0 ? 'text-amber-400' : ''}`} />
           {alertCount > 0 && (
             <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full
                              bg-red-500 text-white text-[9px] font-bold

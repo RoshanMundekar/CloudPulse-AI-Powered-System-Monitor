@@ -3,7 +3,7 @@ Alert Service — checks metric thresholds and creates alerts.
 """
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, desc, update
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from app.models.alerts import Alert
 from app.schemas.alerts import AlertUpdate
 from app.config import settings
@@ -36,7 +36,7 @@ class AlertService:
                     select(Alert)
                     .where(Alert.alert_type == alert_type)
                     .where(Alert.is_resolved == False)
-                    .where(Alert.created_at >= datetime.utcnow() - timedelta(minutes=5))
+                    .where(Alert.created_at >=  datetime.now(UTC) - timedelta(minutes=5))
                     .limit(1)
                 )
                 if existing.scalar_one_or_none():
@@ -81,7 +81,7 @@ class AlertService:
         if data.is_resolved is not None:
             alert.is_resolved = data.is_resolved
             if data.is_resolved:
-                alert.resolved_at = datetime.utcnow()
+                alert.resolved_at =  datetime.now(UTC)
 
         await db.commit()
         await db.refresh(alert)

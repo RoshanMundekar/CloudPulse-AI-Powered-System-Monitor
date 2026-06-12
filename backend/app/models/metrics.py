@@ -63,13 +63,26 @@ class SystemMetric(Base):
     def to_summary_dict(self) -> dict:
         """Lightweight dict used for Redis caching and WS broadcasts."""
         return {
+            # Core utilisation (required by ML + charts)
             "cpu_percent":        self.cpu_percent,
             "ram_percent":        self.ram_percent,
             "disk_percent":       self.disk_percent,
+            # Network I/O
             "net_bytes_recv_mb":  self.net_bytes_recv_mb  or 0,
             "net_bytes_sent_mb":  self.net_bytes_sent_mb  or 0,
+            # Disk I/O
             "disk_read_mb":       self.disk_read_mb        or 0,
             "disk_write_mb":      self.disk_write_mb       or 0,
+            # Capacity fields (shown in MetricCard subtitles)
+            "ram_used_gb":        self.ram_used_gb         or 0,
+            "ram_total_gb":       self.ram_total_gb        or 0,
+            "disk_used_gb":       self.disk_used_gb        or 0,
+            "disk_total_gb":      self.disk_total_gb       or 0,
+            "cpu_count":          self.cpu_count,
+            # System identity (shown in SystemStatus bar)
+            "hostname":           self.hostname            or "N/A",
+            "platform":           self.platform            or "N/A",
+            # Processes snapshot
             "top_processes":      self.top_processes       or [],
             "created_at":         self.created_at.isoformat() if self.created_at else None,
         }

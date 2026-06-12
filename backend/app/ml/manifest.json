@@ -1,0 +1,38 @@
+{
+  "version": "2.0",
+  "trained_at": "2026-06-12T19:40:37.368186+00:00",
+  "sample_count": 1046,
+  "contamination": 0.05,
+  "n_estimators": 150,
+  "features": [
+    "cpu_percent",
+    "ram_percent",
+    "disk_percent",
+    "net_bytes_recv_mb",
+    "net_bytes_sent_mb",
+    "cpu_ram_pressure",
+    "net_total_mb"
+  ],
+  "feature_means": {
+    "cpu_percent": 28.624742898974713,
+    "ram_percent": 61.70966782541333,
+    "disk_percent": 45.70478651998917,
+    "net_bytes_recv_mb": 178.4572179334729,
+    "net_bytes_sent_mb": 81.49301557319698,
+    "cpu_ram_pressure": 45.16720536219405,
+    "net_total_mb": 259.9502335066698
+  },
+  "feature_stds": {
+    "cpu_percent": 19.460974802480095,
+    "ram_percent": 14.420584830840948,
+    "disk_percent": 9.412002118059549,
+    "net_bytes_recv_mb": 251.25841057155506,
+    "net_bytes_sent_mb": 232.18838874979053,
+    "cpu_ram_pressure": 11.063650393898065,
+    "net_total_mb": 459.1172436769214
+  },
+  "score_mean": -0.44259673454552173,
+  "score_std": 0.060170370207639115,
+  "score_min": -0.7799443512436481,
+  "score_max": -0.37986785980006144
+}

@@ -9,7 +9,8 @@ Run: python -m agent.monitor
 import asyncio
 import platform
 import socket
-from datetime import datetime
+# from datetime import datetime
+from datetime import datetime, UTC
 
 from agent.collectors.cpu_collector import collect_cpu
 from agent.collectors.ram_collector import collect_ram
@@ -49,12 +50,12 @@ async def run_agent():
     cycle = 0
     while True:
         cycle += 1
-        start = datetime.utcnow()
+        start =  datetime.now(UTC)
 
         metrics = collect_all_metrics()
         success = await send_metrics(metrics)
 
-        elapsed = (datetime.utcnow() - start).total_seconds()
+        elapsed = ( datetime.now(UTC) - start).total_seconds()
         status = "OK" if success else "FAILED"
         print(
             f"[{start.strftime('%H:%M:%S')}] Cycle #{cycle} | "

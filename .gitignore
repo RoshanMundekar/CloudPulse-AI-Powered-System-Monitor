@@ -1,0 +1,67 @@
+# ─────────────────────────────────────────────
+# CloudPulse — .gitignore
+# ─────────────────────────────────────────────
+
+# ── Node / Frontend ───────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.local
+
+# ── Python / Backend ──────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# ── Environment & Secrets ─────────────────────
+.env
+.env.local
+.env.*.local
+*.env
+
+# ── ML Model files ────────────────────────────
+backend/app/ml/models/*.pkl
+backend/app/ml/models/manifest.json
+
+# ── Logs ──────────────────────────────────────
+*.log
+logs/
+*.log.*
+
+# ── Docker ────────────────────────────────────
+# (docker-compose.yml is intentionally tracked)
+
+# ── OS files ──────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE / Editor ──────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Testing & Coverage ────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ── Misc ──────────────────────────────────────
+*.bak
+*.tmp
+*.orig

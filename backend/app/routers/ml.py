@@ -12,7 +12,7 @@ Why a dedicated /api/ml router?
   you can call /api/ml/predict from the Swagger UI and see in real time which
   feature (cpu/ram/disk/network) is driving the anomaly detection.
 """
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 from fastapi import APIRouter, Query, HTTPException
 
@@ -156,7 +156,7 @@ async def get_anomaly_stats(
 
     Useful for the Analytics page to show anomaly distribution charts.
     """
-    since  = datetime.utcnow() - timedelta(hours=hours)
+    since  =  datetime.now(UTC) - timedelta(hours=hours)
     result = await db.execute(
         select(Anomaly).where(Anomaly.created_at >= since)
     )

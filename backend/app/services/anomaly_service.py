@@ -6,7 +6,7 @@ so it can:
   - set metric_type to the dominant feature (e.g. "cpu_percent", "net_total_mb")
   - build a richer description showing per-feature z-scores for the viva log
 """
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 from sqlalchemy import desc, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -99,7 +99,7 @@ class AnomalyService:
     async def get_anomalies(
         self, db: AsyncSession, hours: int = 24, limit: int = 100
     ) -> list[Anomaly]:
-        since  = datetime.utcnow() - timedelta(hours=hours)
+        since  =  datetime.now(UTC)- timedelta(hours=hours)
         result = await db.execute(
             select(Anomaly)
             .where(Anomaly.created_at >= since)
@@ -121,7 +121,7 @@ class AnomalyService:
         return anomaly
 
     async def get_recent_count(self, db: AsyncSession, hours: int = 1) -> int:
-        since  = datetime.utcnow() - timedelta(hours=hours)
+        since  =  datetime.now(UTC) - timedelta(hours=hours)
         result = await db.execute(
             select(func.count()).select_from(Anomaly).where(Anomaly.created_at >= since)
         )

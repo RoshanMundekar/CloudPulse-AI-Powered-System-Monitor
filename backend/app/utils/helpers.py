@@ -1,11 +1,11 @@
 """
 Utility helpers used across the backend.
 """
-from datetime import datetime
+from datetime import UTC, datetime
 
 
 def utc_now_iso() -> str:
-    return datetime.utcnow().isoformat() + "Z"
+    return  datetime.now(UTC).isoformat() + "Z"
 
 
 def bytes_to_mb(b: int) -> float:

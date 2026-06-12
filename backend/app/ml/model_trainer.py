@@ -14,7 +14,7 @@ Why run_in_executor?
 """
 import asyncio
 import logging
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta, timezone
 
 from sqlalchemy import select
 
@@ -75,7 +75,7 @@ async def _do_retrain() -> dict:
     started_at = datetime.now(timezone.utc)
 
     async with AsyncSessionLocal() as db:
-        since  = datetime.utcnow() - timedelta(hours=24)
+        since  =  datetime.now(UTC) - timedelta(hours=24)
         result = await db.execute(
             select(SystemMetric)
             .where(SystemMetric.created_at >= since)

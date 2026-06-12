@@ -115,7 +115,7 @@ export default function Sidebar() {
 
       {/* ── Footer ────────────────────────────────────────────────────── */}
       <div className="px-5 pt-3 border-t border-white/[0.05]">
-        <p className="text-[10px] text-gray-600 font-medium">MCA Final Year Project</p>
+        <p className="text-[10px] text-gray-600 font-medium">LEARNING PROJECT</p>
         <p className="text-[10px] text-gray-700">CloudPulse v1.0.0</p>
       </div>
     </aside>

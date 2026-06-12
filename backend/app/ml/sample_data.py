@@ -18,7 +18,7 @@ Run standalone:
 """
 import asyncio
 import random
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 import numpy as np
 
@@ -218,7 +218,7 @@ async def insert_sample_data():
     all_metrics = normal + anomalous
     random.shuffle(all_metrics)
 
-    now   = datetime.utcnow()
+    now   =  datetime.now(UTC)
     total = len(all_metrics)
 
     async with AsyncSessionLocal() as db:
