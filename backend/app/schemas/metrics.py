@@ -48,16 +48,19 @@ class MetricResponse(MetricCreate):
 class MetricSummary(BaseModel):
     """
     Lightweight projection for history and sparkline endpoints.
-    Keeps the response payload small (no process list, no disk details).
+    Keeps the response payload small (no process list).
     """
     cpu_percent:       float
     ram_percent:       float
     disk_percent:      float
-    net_bytes_recv_mb: float
-    net_bytes_sent_mb: float
+    disk_read_mb:      Optional[float] = None   # Disk I/O chart
+    disk_write_mb:     Optional[float] = None   # Disk I/O chart
+    net_bytes_recv_mb: Optional[float] = None
+    net_bytes_sent_mb: Optional[float] = None
     created_at:        datetime
 
     model_config = {"from_attributes": True}
+
 
 
 # ── Aggregation response ──────────────────────────────────────────────────────

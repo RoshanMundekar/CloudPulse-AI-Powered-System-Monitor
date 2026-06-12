@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "trained_at": "2026-06-12T19:40:37.368186+00:00",
-  "sample_count": 1046,
+  "trained_at": "2026-06-12T19:50:12.911327+00:00",
+  "sample_count": 1073,
   "contamination": 0.05,
   "n_estimators": 150,
   "features": [
@@ -14,25 +14,25 @@
     "net_total_mb"
   ],
   "feature_means": {
-    "cpu_percent": 28.624742898974713,
-    "ram_percent": 61.70966782541333,
-    "disk_percent": 45.70478651998917,
-    "net_bytes_recv_mb": 178.4572179334729,
-    "net_bytes_sent_mb": 81.49301557319698,
-    "cpu_ram_pressure": 45.16720536219405,
-    "net_total_mb": 259.9502335066698
+    "cpu_percent": 28.230256904992213,
+    "ram_percent": 62.156063257512244,
+    "disk_percent": 45.553093081737735,
+    "net_bytes_recv_mb": 188.26996779916354,
+    "net_bytes_sent_mb": 84.19514533948907,
+    "cpu_ram_pressure": 45.19316008125228,
+    "net_total_mb": 272.46511313865244
   },
   "feature_stds": {
-    "cpu_percent": 19.460974802480095,
-    "ram_percent": 14.420584830840948,
-    "disk_percent": 9.412002118059549,
-    "net_bytes_recv_mb": 251.25841057155506,
-    "net_bytes_sent_mb": 232.18838874979053,
-    "cpu_ram_pressure": 11.063650393898065,
-    "net_total_mb": 459.1172436769214
+    "cpu_percent": 19.36988468111173,
+    "ram_percent": 14.411842152089282,
+    "disk_percent": 9.300181722362018,
+    "net_bytes_recv_mb": 253.88840051660134,
+    "net_bytes_sent_mb": 229.63571913520832,
+    "cpu_ram_pressure": 10.916192790737906,
+    "net_total_mb": 458.286560447235
   },
-  "score_mean": -0.44259673454552173,
-  "score_std": 0.060170370207639115,
-  "score_min": -0.7799443512436481,
-  "score_max": -0.37986785980006144
+  "score_mean": -0.44079374143028777,
+  "score_std": 0.0610619924216215,
+  "score_min": -0.7813528205952073,
+  "score_max": -0.38253006531896433
 }
